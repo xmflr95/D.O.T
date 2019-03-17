@@ -1,0 +1,36 @@
+<!-- views/home/about.ejs -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+    
+    <style>
+        body {
+            background-color: rgb(225, 228, 235);
+        }
+        
+        h1 {
+            color: #495057;
+        }
+        
+        @media (min-width: 992px) {
+            .container {
+                transform: scale(1.2);
+                margin: 10% 0 0 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <% include ../partials/nav %>
+    <div class="container" style="margin-Top:100px;">
+        <h1>About</h1>
+        <br>
+        <p>이 사이트는 포트폴리오 정리 및 정보 공유 사이트입니다.</p>
+    </div>
+</body>
+
+</html>

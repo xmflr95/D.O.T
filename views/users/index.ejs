@@ -1,0 +1,75 @@
+<!-- users/index.ejs-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+    
+    <style>
+        body {
+            background-color: rgb(225, 228, 235);
+        }
+        
+        .container {
+            margin-top: 5em;
+        }
+        
+        .user {
+            max-width: 700px;
+        }
+        
+        .user-index ul {
+            margin: 0;
+            padding: 3px 12px;
+        }
+        
+        .user-index ul:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        
+        .user-index ul li {
+            display: inline-block;
+            list-style-type: none;
+            float: left;
+        }
+        
+        .user-index ul li a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            margin: 3px;
+            background-color: #bac8ff;
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+        
+        .user-index ul li a:hover {
+            background-color: #5c7cfa;
+        }
+        
+        .
+    </style>
+  </head>
+  <body>
+    <% include ../partials/nav %>
+
+    <div class="container user user-index">
+
+      <div class="contentBox">
+        <h2 class="contentBoxTop">사용자 목록</h2>
+        <ul class="breadcrumb">
+          <% if(users == null || users.length == 0){ %>
+            <div class="noData" colspan=100> 아직 사용자가 없어요... <br> ㅠ.ㅠ</div>
+          <% } %>
+          <% users.forEach(function(user) { %>
+            <li>
+              <a href="/users/<%= user.username %>"><%= user.username %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+    </div> <!-- container end -->
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!-- views/home/welcome.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+    <!-- custom css -->
+    <link rel="stylesheet" href="/css/intro.css">
+</head>
+
+<body>
+    <div class="site-wrapper">
+        <nav class="nav nav-masthead">
+        </nav>
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <main role="main" class="inner cover">
+                    <h1 class="cover-heading">D.O.T</h1>
+                    <p class="lead">Dream of Twenties</p>
+                    <br>
+                    <br>
+                    <p class="lead">
+                        <% if (isAuthenticated) { %>
+                        <a href="/posts" class="btn btn-lg btn-primary">시작하기</a>
+                        <% } else { %>
+                        <a href="/login" class="btn btn-lg btn-primary">시작하기</a>
+                        <% } %>
+                    </p>
+                    <% if (!isAuthenticated) { %>
+                    <a class="noLogin" href="/posts">로그인하지않고 둘러보기</a>
+                    <% } %>
+                </main>
+
+                <footer class="mastfoot">
+                    <div class="inner">
+                        <p>© Copyright 2018 <a href="#">PortFolio</a>, made by <a href="#">Han</a> and <a href="#">Kim</a>.</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

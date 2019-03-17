@@ -1,0 +1,82 @@
+<!-- views/posts/show.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+
+    <style>
+        body {
+            background-color: rgb(225, 228, 235);
+        }
+
+        .card {
+            text-align: left;
+            margin: 4% 10% 0 10%;
+            background: #d3f9d8;
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                margin: 4% .8em 0 .8em;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .card {
+                margin: 4% 15% 0 15%;
+                transform: scale(1.2);
+            }
+        }
+
+        .Content {
+            white-space: pre-line;
+        }
+
+        .buttons {
+            margin: 4.5em 0 0 1.5em;
+        }
+        
+        form {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <% include ../partials/nav %>
+
+    <div class="buttons">
+        <a class="btn btn-secondary back" href="/posts">Back</a>
+        <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
+        <a class="btn btn-secondary" href="/posts/<%= post._id %>/edit"><i class="far fa-edit"></i></a>
+        <form action="/posts/<%= post._id %>?_method=delete" method="post">
+            <a class="btn btn-secondary" href="#" onclick="confirm('정말 Post를 삭제 하시겠습니까?')?this.parentElement.submit():null;"><i class="fas fa-times"></i></a>
+        </form>
+        <% } %>
+    </div>
+
+    <div class="card bg-light mb-3">
+        <div class="card-header"><span>글쓴이</span> :
+            <%= post.author ? post.author.name : "" %>
+        </div>
+        <div class="card-header">
+            <%= post.header %>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title font-weight-bold">
+                <%= post.title %>
+            </h4>
+            <p class="card-text Content">
+                <%= post.content %>
+            </p>
+        </div>
+
+        <p class="card-text mr-4 mb-1" style="text-align: right;">
+            <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                <%= post.createdDate %></small>
+            <p>
+    </div>
+</body>
+
+</html>

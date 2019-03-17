@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <% include ../partials/head %>
+
+    <link rel="stylesheet" href="/css/main2.css">
+
+</head>
+
+<body>
+    <% include ../partials/nav %>
+
+    <div class="container" id="container">
+        <!-- 로그인한 경우에 보임 -->
+        <% if (isAuthenticated) { %>
+        <button class="btn btn-success addBtn" href="/posts/new" data-toggle="modal" data-target="#myModal">Add Post</button>
+        <% } %>
+    </div>
+
+    <button class="btn btn-warning rounded-circle upBtn" onclick="goTop()"><i class="fas fa-caret-up"></i></button>
+
+    <% if (isAuthenticated) { %>
+    <div class="container-fluid cardC">
+        <% if(posts == null || posts.length == 0) { %>
+        <h1 style="text-align:center;">글이 없습니다<br>ㅠ.ㅠ</h1>
+        <% } %>
+        <div class="card-columns">
+
+<!--
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="/css/port2.png" alt="Card image cap">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                </div>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        2018-12-05 <i class="far fa-user"></i>
+                        changhee</small>
+                    <p>
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="#" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <form>
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+-->
+
+
+
+            <% posts.forEach(function(post) { %>
+            <div class="card bg-light text-black">
+                <% if (post.header == "" || null) { %>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if (post.title == "" || null) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if (post.content == "" || null) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                </div>
+                <% } else if ((post.header == "" || null) && (post.title == "" || null)) { %>
+                <div class="card-body">
+                    <p class="card-text">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if ((post.header == "" || null) && (post.content == "" || null)) { %>
+                <div class="card-body">
+                    <h4 class="card-title Content">
+                        <%= post.title%>
+                    </h4>
+                </div>
+                <% } else if ((post.title == "" || null) && (post.content == "" || null)) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                    <small class="text-muted">no content</small>
+                </div>
+                <% } else { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } %>
+
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        <%= post.createdDate %> <i class="far fa-user"></i>
+                        <%= post.author ? post.author.name : "" %></small>
+                    <p>
+
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="/posts/<%= post._id %>" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
+                                <form action="/posts/<%= post._id %>?_method=delete" method="post">
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                                <% } %>
+                            </div>
+                        </div>
+            </div>
+
+            <% }) %>
+
+
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="/css/port1.png" alt="Card image cap">
+                <div class="card-header">PortFolio</div>
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                </div>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        2018-12-05 <i class="far fa-user"></i>
+                        한창희</small>
+                    <p>
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="#" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <form>
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="/css/port3.png" alt="Card image cap">
+                <div class="card-header">PortFolio</div>
+                <div class="card-body">
+                    <h4 class="card-title">D.O.T</h4>
+                    <p class="card-text">Dream of twenties</p>
+
+                </div>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        2018-12-05 <i class="far fa-user"></i>
+                        한창희</small>
+                    <p>
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="#" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <form>
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+        </div>
+
+    </div>
+
+    <% } else { %>
+
+    <div class="container-fluid cardD">
+        <% if(posts == null || posts.length == 0) { %>
+        <h1 style="text-align:center;">글이 없습니다<br>ㅠ.ㅠ</h1>
+        <% } %>
+        <div class="card-columns">
+            <% posts.forEach(function(post) { %>
+            <div class="card bg-light text-black">
+                <% if (post.header == "" || null) { %>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if (post.title == "" || null) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if (post.content == "" || null) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                </div>
+                <% } else if ((post.header == "" || null) && (post.title == "" || null)) { %>
+                <div class="card-body">
+                    <p class="card-text">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } else if ((post.header == "" || null) && (post.content == "" || null)) { %>
+                <div class="card-body">
+                    <h4 class="card-title Content">
+                        <%= post.title%>
+                    </h4>
+                </div>
+                <% } else if ((post.title == "" || null) && (post.content == "" || null)) { %>
+                <div class="card-header">
+                    <%= post.header %>
+                    <small class="text-muted">no content</small>
+                </div>
+                <% } else { %>
+                <div class="card-header">
+                    <%= post.header %>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%= post.title%>
+                    </h4>
+                    <p class="card-text Content">
+                        <%= post.content %>
+                    </p>
+                </div>
+                <% } %>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        <%= post.createdDate %> <i class="far fa-user"></i>
+                        <%= post.author ? post.author.name : "" %></small>
+                    <p>
+
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="/posts/<%= post._id %>" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
+                                <form action="/posts/<%= post._id %>?_method=delete" method="post">
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                                <% } %>
+                            </div>
+                        </div>
+            </div>
+
+            <% }) %>
+
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="/css/port1.png" alt="Card image cap">
+                <div class="card-header">PortFolio</div>
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                </div>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        2018-12-05 <i class="far fa-user"></i>
+                        한창희</small>
+                    <p>
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="#" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <form>
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="/css/port3.png" alt="Card image cap">
+                <div class="card-header">PortFolio</div>
+                <div class="card-body">
+                    <h4 class="card-title">D.O.T</h4>
+                    <p class="card-text">Dream of twenties</p>
+
+                </div>
+                <p class="card-text mr-4 mb-1" style="text-align: right;">
+                    <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                        2018-12-05 <i class="far fa-user"></i>
+                        한창희</small>
+                    <p>
+                        <div class="card-footer">
+                            <div class="row justify-content-end">
+                                <a href="#" class="btn btn-primary mr-1"><i class="far fa-thumbs-up"></i></a>
+                                <a href="#" class="btn btn-light"><i class="fas fa-search"></i></a>
+                                <form>
+                                    <a href="#" class="btn btn-light ml-1" onclick="confirm('정말 Post를 삭제 하시겠습니까?') ? this.parentElement.submit() : null;"><i class="fas fa-times"></i></a>
+                                </form>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+
+    <% } %>
+    <% include ./post_modal %>
+
+    <script>
+        function goTop() {
+            $('html, body').scrollTop(0);
+            // scrollTop 메서드에 0 을 넣어서 실행하면 끝 !!
+            // 간혹 이 소스가 동작하지 않는다면
+            // $('html, body') 로 해보세요~
+        }
+
+    </script>
+</body>
+
+</html>

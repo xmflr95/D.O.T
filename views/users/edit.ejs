@@ -1,0 +1,163 @@
+<!-- views/users/edit.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+
+    <style>
+        body {
+            background-color: rgb(225, 228, 235);
+        }
+        
+        .container {
+            margin-top : 4.5em;
+            max-width: 1000px;
+        }
+        
+        .buttons {
+            width: 100%;
+        }
+        
+        .back {
+            position: fixed;
+            z-index: 2;
+            left: 1.5em;
+        }
+        
+        b {
+            color: #495057;
+        }
+        
+        .contentBoxTop {
+            margin-bottom: 1em;
+        }
+        
+        .alert {
+            margin-top: .8em;
+            display:inline-block;
+            width: 100%;
+        }
+        
+        .user-form {
+            margin-top: 2em;
+        }
+        .user-edit hr{
+          margin-top: 5px;
+          margin-bottom: 11px;
+        }
+        
+        .submitBtn {
+            position: relative;
+            left: 80%;
+        }
+        
+        @media (min-width: 992px) {
+            .user-form {
+                margin: 7em 0 0 7em;
+                transform: scale(1.2);
+            }    
+        }
+      </style>
+</head>
+
+<body>
+    <% include ../partials/nav %>
+
+    <div class="buttons">
+        <a class="btn btn-secondary back" href="/users/<%= user.username %>">Back</a>
+    </div>
+
+    <div class="container user user-edit">
+        <br>
+        <form class="user-form form-horizontal" action="/users/<%= username %>?_method=put" method="post">
+            <div class="contentBox">
+                <h3 class="contentBoxTop"><b>개인정보수정</b></h3>
+                <fieldset>
+                    <div class="form-group <%= (errors.currentPassword)?'has-error':'' %>">
+                        <label for="currentPassword" class="col-sm-12 control-label">Current Password*</label>
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <input class="form-control" type="password" id="currentPassword" name="currentPassword" value="">
+                            <% if(errors.currentPassword){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.currentPassword.message %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group <%= (errors.username)?'has-error':'' %>">
+                        <label for="username" class="col-sm-3 control-label">Username*</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="username" name="username" value="<%= user.username %>">
+                            <% if(errors.username){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.username.message %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="form-group <%= (errors.name)?'has-error':'' %>">
+                        <label for="name" class="col-sm-3 control-label">Name*</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+                            <% if(errors.name){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.name.message %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="form-group <%= (errors.email)?'has-error':'' %>">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="email" name="email" value="<%= user.email %>">
+                            <% if(errors.email){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.email.message %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="form-group <%= (errors.newPassword)?'has-error':'' %>">
+                        <label for="newPassword" class="col-sm-12 control-label">New Password</label>
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <input class="form-control" type="password" id="newPassword" name="newPassword" value="">
+                            <% if(errors.newPassword){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.newPassword.message %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="form-group <%= (errors.passwordConfirmation)?'has-error':'' %>">
+                        <label for="passwordConfirmation" class="col-sm-12 control-label">Password Confirmation</label>
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" value="">
+
+                            <% if(errors.passwordConfirmation){ %>
+                            <span class="alert alert-warning">
+                                <%= errors.passwordConfirmation.message %></span>
+                            <% } %>
+
+                        </div>
+                        <br>
+                        <p>
+                            <small>*Required</small>
+                        </p>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="row">
+                
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+            </div>
+            <% if(errors.unhandled){ %>
+            <div class="alert alert-danger">
+                <%= errors.unhandled %>
+            </div>
+            <% } %>
+        </form>
+
+    </div> <!-- container end -->
+</body>
+
+</html>

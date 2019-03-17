@@ -1,0 +1,85 @@
+body {
+    margin: 2%;
+    background-image: url(/css/image1.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100%;    
+}
+
+.form-signin-heading {
+    font-size: 3em;
+    color: #f8f9fa;
+}
+
+.ep {
+    color: #fff;
+}
+
+.form-signin {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
+
+.form-signin .checkbox {
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.checkbox {
+    color: #e9ecef;
+}
+
+.form-signin .form-control {
+    position: relative;
+    background-color: rgba(255,255,255,.7);
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: .8em;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type-"email"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+.goLogin {
+    margin-top: 1.2em;
+    color: #fff;
+}
+
+.goLogin a {
+    text-decoration: none;
+    color: #ffec99;
+}
+
+@media (max-width: 40em) {
+    body {
+        padding-top: 8%;
+    }
+}
+
+@media (max-height: 575px) {
+    body {
+        padding-top: 0;
+    }
+}

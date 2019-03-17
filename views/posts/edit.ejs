@@ -1,0 +1,120 @@
+<!-- views/posts/eidt.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+
+    <style>
+        body {
+            background-color: rgb(225, 228, 235);
+        }
+
+        .card {
+            text-align: left;
+            margin: 4% 10% 0 10%;
+            background: #d3f9d8;
+        }
+        
+        .Complete {
+            margin: 5% 0 0 70%;
+        }
+        
+        @media (max-width: 576px) {
+            .card {
+                margin: 4% .8em 0 .8em;
+            }
+            
+            .Complete {
+                margin: 4% 0 0 75%;
+            }
+        }
+        
+        @media (min-width: 576px) {
+            .Complete {
+                margin: 4% 0 0 75%;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .Complete {
+                margin: 4% 0 0 80%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .card {
+                margin: 5% 15% 0 15%;
+                transform: scale(1.2);
+            }
+            
+            .Complete {
+            margin: 5% 0 0 85%;
+                transform: scale(1.2);
+            }
+        }
+        
+        .Content {
+            min-height: 300px;
+        }
+        
+        .form-control {
+            display: inline-block;
+        }
+        
+        .buttons {
+            margin: 4.5em 0 0 1.5em;
+        }
+        .buttons form {
+            display:inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <% include ../partials/nav %>
+
+    <div class="buttons">
+        <a class="btn btn-secondary back" href="/posts/<%= post._id %>">Back</a>
+    </div>
+    
+    <form action="/posts/<%= post._id %>?_method=put" method="post">
+        <div class="card bg-light mb-3">
+            <div class="card-header">
+                Head :
+                <br>
+                <input class="form-control" type="text" id="header" name="header" value="<%= post.header %>">
+            </div>
+            <div class="card-body">
+                <h4 class="card-title font-weight-bold">
+                    title :
+                    <br>
+                    <input class="form-control" type="text" id="title" name="title" value="<%= post.title %>">
+                </h4>
+                <p class="card-text">
+                    content :
+                    <textarea class="form-control Content" type="text" id="content" name="content"><%= post.content %></textarea>
+                </p>
+            </div>
+
+            <p class="card-text mr-4 mb-1" style="text-align: right;">
+                <small class="test-muted"><i class="far fa-calendar-alt"></i>
+                    <%= post.createdDate %></small>
+                <p>
+        </div>
+
+        <div class="Complete">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <% if (errors.unhandled) { %>
+        <div class="alert alert-warning">
+            <%= errors.unhandled %>
+        </div>
+        <% } %>
+    </form>
+
+
+</body>
+
+</html>

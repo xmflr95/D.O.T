@@ -1,0 +1,28 @@
+<form method="post" action="/posts">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">New Post</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="inputHeader">Header</label>
+                    <input type="text" name="header" id="inputHeader" class="form-control" placeholder="Header" autofocus>
+                    <label for="inputHeader">Title</label>
+                    <input type="text" name="title" id="inputHeader" class="form-control" placeholder="제목" autofocus>
+                    <label for="inputContent">Content</label>
+                    <textarea type="text" name="content" id="inputContent" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <div class="filebox"> <label for="ex_file">업로드</label> <input type="file" id="ex_file"> </div>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary">Post 쓰기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

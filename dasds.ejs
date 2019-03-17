@@ -1,0 +1,81 @@
+<% posts.forEach(function(post) { %>
+<div class="card bg-light text-black">
+    <% if (post.header == "" || null) { %>
+    <div class="card-body">
+        <h4 class="card-title">
+            <%= post.title%>
+        </h4>
+        <p class="card-text">
+            <%= post.content %>
+        </p>
+    </div>
+    <% } else if (post.title == "" || null) { %>
+        <div class="card-header">
+        <%= post.header %>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <%= post.content %>
+        </p>
+    </div>
+    <% } else if (post.content == "" || null) { %>
+        <div class="card-header">
+        <%= post.header %>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <%= post.title%>
+        </h4>
+    </div>
+    <% } else if ((post.header == "" || null) && (post.title == "" || null)) { %>
+        <div class="card-body">
+        <h4 class="card-title">
+            <%= post.title%>
+        </h4>
+    </div>
+    <% } else if ((post.title == "" || null) && (post.content == "" || null)) { %>
+    <div class="card-header">
+        <%= post.header %>
+    </div>
+    <% } else if ((post.header == "" || null) && (post.content == "" || null)) { %>
+    <div class="card-body">
+        <h4 class="card-title">
+            <%= post.title%>
+        </h4>
+    </div>
+    <% } %>
+    
+    <div class="card-footer">
+        <small class="test-muted">
+            <%= post.createdDate %></small>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="btn btn-success">Like</a>
+        <a href="#" class="btn btn-danger float-right">&times;</a>
+    </div>
+</div>
+<% } %>
+
+
+<div class="card bg-light text-black">
+    <div class="card-header">
+        <%= post.header %>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">
+            <%= post.title%>
+        </h4>
+        <p class="card-text">
+            <%= post.content %>
+        </p>
+    </div>
+    <div class="card-footer">
+        <small class="test-muted">
+            <%= post.createdDate %></small>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="btn btn-success">Like</a>
+        <a href="#" class="btn btn-danger float-right">&times;</a>
+    </div>
+</div>
+<% }) %>

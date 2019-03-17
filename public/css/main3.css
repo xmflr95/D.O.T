@@ -1,0 +1,85 @@
+body {
+    background-color: #d3f9d8;
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
+.container {
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.navbar-brand {
+}
+
+.addBtn {
+    z-index: 2;
+    position: fixed;
+    left: 1em;
+}
+
+.addBtn:hover {
+    cursor: pointer;
+}
+
+.addBtn:focus {
+    outline: none;
+}
+
+.upBtn {
+    z-index: 2;
+    position: fixed;
+    right: 1.5em;
+    bottom: 1.5em;
+}
+
+.upBtn:hover {
+    cursor: pointer;
+}
+
+.upBtn:focus {
+    outline: none;
+}
+
+.cardC {
+    margin-top: 4em;
+}
+
+.card-columns {
+    margin: -0.5em;
+}
+
+.Content {
+    white-space: pre-line;
+}
+
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 4;
+    }    
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 5;
+    }
+}
+
+#inputContent {
+    resize: none;
+    height: 8rem;
+}
